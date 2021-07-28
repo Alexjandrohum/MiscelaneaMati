@@ -1,0 +1,155 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: API Microservice for register Address of users
+  description: Information main persons that they will like managed your bussines
+host: 'localhost:8080'
+basePath: "/v1"
+schemes:
+  - http
+produces:
+  - application/json
+consumes:
+  - application/json
+paths:
+  /create:
+    post:
+      description: Create a address of user
+      tags:
+        - Create Address
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: body
+          in: body
+          required: true
+          description: Information required for add to address
+          schema:
+            $ref: "#/definitions/inputAddress"
+      responses:
+        201:
+          description: CREATED
+          schema:
+            $ref: "#/definitions/responseCreateAddress"
+        400:
+          description: BAD_REQUEST
+          schema:
+            $ref: "#/definitions/badRequestCreateAddress"
+        500:
+          description: INTERNAL_SERVER_ERROR
+          schema:
+            $ref: "#/definitions/internalServerErrorCreateAddress"
+definitions:
+  inputAddress:
+    type: object
+    required:
+      - nameAddress
+      - numberInside
+      - city
+      - region
+      - postalCode
+      - phone
+    properties:
+      nameAddress:
+        type: string
+        description: "Nombre de la calle"
+        example: "Calle Benito"
+      numberInside:
+        type: string
+        description: "Número interior"
+        example: "32"
+      numberOutside:
+        type: string
+        description: "Número exterior"
+        example: "23"
+      city:
+        type: string
+        description: "Nombre de la Ciudad"
+        example: "Tepeaca"
+      region:
+        type: string
+        description: "Nombre de la región"
+        example: "Huixcolotla"
+      postalCode:
+        type: number
+        description: "Código postal"
+        example: 75420
+      fax:
+        type: string
+        description: "Fax"
+        example: "3243253"
+      phone:
+        type: string
+        description: "Teléfono"
+        example: "2493646454"
+  responseCreateAddress:
+    type: object
+    properties:
+      idAddress:
+        type: number
+        description: "Identificador de la dirección"
+        example: 23423
+      nameAddress:
+        type: string
+        description: "Nombre de la calle"
+        example: "Calle Benito"
+      numberInside:
+        type: string
+        description: "Número interior"
+        example: "32"
+      numberOutside:
+        type: string
+        description: "Número exterior"
+        example: "23"
+      city:
+        type: string
+        description: "Nombre de la Ciudad"
+        example: "Tepeaca"
+      region:
+        type: string
+        description: "Nombre de la región"
+        example: "Huixcolotla"
+      postalCode:
+        type: number
+        description: "Código postal"
+        example: 75420
+      fax:
+        type: string
+        description: "Fax"
+        example: "3243253"
+      phone:
+        type: string
+        description: "Teléfono"
+        example: "2493646454"
+  badRequestCreateAddress:
+    type: object
+    properties:
+      codigo:
+        type: string
+        description: "Descripción del código"
+        example: "Code 400"
+      mensaje:
+        type: string
+        description: "Decripción del mensaje de error"
+        example: "Petición incorrecta"
+      info:
+        type: string
+        description: "Información del error"
+        example: "Nombre de la calle es requerida"
+  internalServerErrorCreateAddress:
+    type: object
+    properties:
+      codigo:
+        type: string
+        description: "Descripción del código"
+        example: "Code 500"
+      mensaje:
+        type: string
+        description: "Decripción del mensaje de error"
+        example: "Error interno en el servidor"
+      info:
+        type: string
+        description: "Información del error"
+        example: "El sistema no pudo procesaer la solicitud"
